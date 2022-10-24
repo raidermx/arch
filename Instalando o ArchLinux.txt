@@ -1,0 +1,202 @@
+Instalando o ArchLinux
+powered by ctfcarlostorres@hotmail.com
+
+archlinux.org
+
+linha de comando
+$ =  diretório do usuário
+# =  diretório root
+#/ = diretório chroot
+
+configurar teclado:
+
+# loadkeys br-abnt2
+
+configurar o idioma:
+
+# nano /etc/locale.gen
+descomentar pt-br
+
+# locale-gen
+
+export LANG=pt_BR.UTF-8
+
+configurar internet:
+conectar cabo usb do smartphone em modo tethering (conexão usb)
+
+# pacman -S networkmanager net-tools
+# systemctl enable NetworkManager
+# systemctl start NetworkManager
+
+configurar wifi:
+# nmtui
+# ping -c3 archlinux.org
+
+atualizar relógio:
+# timedatectl set-ntp true
+
+particionar o disco:
+
+# fdisk /dev/sda
+d
+g
+n
+enter
+enter 
++512M
+type efi system
+
+n 
+enter
+enter
++4G
+type swap
+
+n
+enter
+enter
++resto do disco
+
+obs.: para bios boot, criar partição de +2M sem formatar, necessária para MBR. e adicionar flag bios legacy no x A 1 do fdisk.
+
+formatar disco:
+
+# mkfs.ext4 /dev/sda3
+# mkfs.fat -F 32 /dev/sda1
+
+montar sistema de arquivos:
+
+# mount /dev/sda3 /mnt
+# swapon /dev/sda2
+# mount --mkdir /dev/sda1 /mnt/boot/efi
+
+copiar os pacotes essenciais:
+
+# pacstrap /mnt base base-devel linux linux-headers linux-firmware nano vim neovim  dhcpcd networkmanager net-tools bash-completion dosfstools ntfs-3g networkmanager-applet os-prober snapper
+
+gerar o FSTAB:
+
+# genfstab -U  -p  /mnt >>  /mnt/etc/fstab
+
+
+Mudar para a raiz do novo sistema:
+
+# arch-chroot /mnt
+
+configurar o sistema novo:
+
+atribuir o nome da maquina
+#/ echo "archlinux" >> /etc/hostname
+
+configurando os locais e hora do sistema:
+
+#/ ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
+
+#/ hwclock --systohc --utc
+
+#/ nano /etc/locale.gen
+descomenta pt-br
+
+#/ locale-gen
+
+configurando idioma e teclado:
+
+#/ echo "LANG=pt_BR.UTF-8" >> /etc/locale.conf
+#/ echo "KEYMAP=br-abnt2" >> /etc/vconsole.conf
+
+
+
+confirmar o initramfs
+
+#/ mkinitcpio -P
+
+senha do root
+
+#/ passwd
+
+
+criando usuário
+
+#/ useradd -m -g users -G wheel,storage,power -s /bin/bash usuario
+
+#/ passwd usuario
+
+pacman -S programa : para instalar pacotes
+
+instalar o gerenciador de boot:
+
+#/ pacman -S grub efibootmgr grub-btrfs(para partições btrfs)
+
+#/ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
+
+obs.:acrescetntar --removable para instalar no pendrive. e instalar o
+grub bios: grub-install --target-i386-pc --recheck /dev/sda
+
+#/ grub-mkconfig -o /boot/grub/grub.cfg
+#/ exit (sair do chroot)
+
+# umount /mnt/boot/efi
+# umount /mnt
+
+# reboot
+
+configurar internet
+systemctl enable NetworkManager
+systemctl start NetworkManager
+systemctl enable dhcpcd
+dhcpcd
+nmtui
+
+configurar interface gráfica
+
+$ sudo pacman -S xorg xorg-server xorg-xinit xorg-apps mesa 
+
+XFCE4
+
+$ sudo pacman -S lightdm xfce4 xfce4-goodies 
+vim .xinitrc
+exec startxfce4
+
+
+KDE plasma
+
+$ sudo pacman -Syu
+
+$ sudo pacman -S plasma
+
+$ sudo pacman -S sddm
+
+- ativar sddm
+
+$ sudo systemctl enable sddm  
+
+
+
+
+
+
+gnome
+$ sudo pacman -S gnome gnome-extra gnome-tweaks firefox
+
+$ pwd
+
+vim .xinitrc
+
+export XDG_SESSION_TYPE=x11
+
+export GDK_BACKEND=x11
+
+exec gnome-session
+
+:wq
+
+- ativar o gdm
+
+$ sudo systemctl enable gdm
+
+$ sudo systemctl status gdm
+
+
+
+
+
