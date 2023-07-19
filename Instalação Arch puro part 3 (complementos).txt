@@ -1,0 +1,127 @@
+ Parte 3 Instalando complementos
+
+revisão
+instalar tudo denovo
+sudo pacman -S bash-completion plasma-desktop plasma-wayland-session plasma-nm plasma-framework ffmpegthumbnailer ffmpegthumbs plasma-pa okular gwenview kscreen powerdevil noto-fonts-emoji sddm konsole dolphin dolphin-plugins spectacle plasma-integration plasma-workspace kded kwayland kwayland-integration systemsettings plasma-workspace-wallpapers firefox ntfs-3g ark
+========================================================================================================
+ 
+ Instalar o wine 
+ 	
+ 	habilite o repositorio multi lib
+ 	
+ 		sudo nano /etc/pacman.conf
+ 		
+ 			descomentar as linhas (tirar o # da frente)
+ 	
+#[mulitlib]
+#Include=/etc/pacman.d/mirrorlist
+
+		sudo pacman -Suy
+
+		sudo pacman -S wine-staging  winetricks wine-mono wine-gecko
+		
+========================================================================================================
+
+Adiciona o Aur com yay ou paru
+
+OBS: nunca execute o paru ou yay com sudo ou root,  o paru pede que vc veja o codigo antes de compilar diferente do yay que vai automatico.
+
+	sudo pacman -S git base-devel  (da enter em todos)
+	
+	git clone https://aur.archlinux.org/paru.git   
+	
+OBS: se quiser o yay coloque no lugar do paru.
+
+	cd paru
+	
+	makepkg -si
+	
+Habilitar cor em Paru
+
+	sudo nano /etc/pacman.conf 
+	
+	descomente color 
+
+========================================================================================================
+	
+Mudar o Kernel p/o zen
+
+	sudo pacman -S linux-zen linux-zen-headers
+	
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	
+sudo reboot now  
+
+conferir se o kernel mudou 
+
+	uname -r
+
+========================================================================================================
+
+Dependencia do wine
+
+	sudo pacman -S --needed wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
+mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
+lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo \
+sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
+ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 \
+lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
+
+========================================================================================================
+
+Instalando drivers
+
+	Nvidia
+		sudo pacman -S --needed nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings vulkan-icd-loader lib32-vulkan-icd-loader
+		
+	AMD
+		sudo pacman -S --needed lib32-mesa vulkan-radeon lib32-vulkan-radeon vulkan-icd-loader lib32-vulkan-icd-loader
+	
+	Intel
+		sudo pacman -S --needed lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader
+		
+========================================================================================================
+
+
+Instalar Lojas caso vc goste
+
+OBS: para a discover funcionar corretamente 
+
+sudo pacman -S packagekit-qt5 archlinux-appstream-data
+
+Pamac Loja do manjaro
+
+	paru -S pamac-aur pamac-tray-icon-plasma libpamac archlinux-appstream-data ( quando pedir se vc quer instalar o libpamac-aur vc escolhe o libpamac a mesma coisa com o archlinux-appstream-data)
+	pra não bugar a loja como no video.
+	
+Loja semelhante ao synatpics octopi
+
+		paru -S octopi
+	
+========================================================================================================
+
+corrigindo o bug da carteira do kde
+
+sudo pacman -S kwalletmanager
+
+depois nas configurações desative-a
+	
+========================================================================================================
+	
+	sudo pacman -S ark kate plasma-browser-integration 	 
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+			
+	
+	
+	
+
+

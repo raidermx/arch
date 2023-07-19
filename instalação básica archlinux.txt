@@ -1,0 +1,94 @@
+instalação básica archlinux
+
+loadkeys br-abnt2
+
+nano /etc/locale.gen
+locale-gen
+
+ip link
+
+ping -c3 archlinux.org
+
+timedatectl set-ntp true
+
+fdisk -l
+/boot/efi 300M
+swap 8g
+raiz / 100g
+/home resto do disco
+mkfs.fat -F32 /dev/sda1
+mkswap /dev/sda2
+mkfs.btrfs /dev/sda3
+mkfs.btrfs /dev/sda4
+
+mkdir /mnt/boot
+mkdir /mnt/boot/efi
+
+mount /dev/sda4 /mnt
+mount /dev/sda1 /mnt/boot/efi
+swapon /dev/sda2
+
+pacstrap -k /mnt base base-devel linux linux-firmware linux-headers nano vim
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+
+ ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
+
+ hwclock --systohc
+
+ nano /etc/locale.gen
+ locale-gen
+
+ nano /etc/locale.conf
+ LANG=pt_BR.UTF-8
+
+ nano /etc/vconsole.conf
+ KEYMAP=br-abnt2
+
+ nano etc/hostname
+ maquina
+
+ nano /etc/hosts
+ 127.0.0.1   localhost.localdomain localhost
+
+ ::1  localhost.localdomain localhost
+
+ 127.0.0.1  maquina.localdomain maquina
+
+ passwd
+
+ useradd -m -g users -G wheel,storage,power -s /bin/bash nomedousuario
+
+ nano /etc/sudoers
+ descomentar primeiro wheel
+
+ pacman -S dosfstools mtools os-prober grub network-manager-applet networkmanager wpa_supplicant wireless_tools dialog dhcpcd
+
+
+ instalar o grub 
+
+modo legacy
+
+	grub-install --target=i386-pc /dev/sda (é o hd que está o seu arch tome muito cuidado nesta hoje)
+	
+	grub-mkconfig -o /boot/grub/grub.cfg
+	
+===========================
+
+modo efi
+
+	pacman -S grub efibootmgr
+	
+	grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub	
+	
+	grub-mkconfig -o /boot/grub/grub.cfg
+
+
+exit
+reboot
+
+
+
+

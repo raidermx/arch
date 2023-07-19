@@ -1,0 +1,29 @@
+Instalação padrão Manjaro
+
+Desabilitar Secure boot  f2,f12,del,ESC
+habilitar UEFI
+boot com iso de instalação
+iniciar kalamares
+swap com hibernação
+sistema btrfs 
+
+atualização do sistema:
+pacman -S archlinux-keyring
+pacman -Syyuu
+
+instalar pacotes:
+pacman -S base-devel
+pacman -S neovim git curl
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+yay google chrome
+yay temviewer
+yay ttf-ms-win11
+pamac build ms-office-online (yay microsoft-office-web-jak)
+configurar usuarios
+configurar individualmente:
+gmail
+onedrive
+desktop
+energia

@@ -1,0 +1,11 @@
+Timeshift - máquina do tempo
+
+Volte seu sistema ao estado original:
+
+sudo timeshift --create
+
+sudo timeshift --list
+
+sudo timeshift --restore
+
+sudo timeshift --delete

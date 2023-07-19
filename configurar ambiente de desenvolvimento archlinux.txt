@@ -1,0 +1,109 @@
+configurar ambiente de desenvolvimento archlinux
+
+wsl --install no windows
+ArchWSL no github https://github.com/yuk7/ArchWSL
+
+vim /etc/pacman.conf
+ParallelDownloads = 5
+
+pacman -S archlinux-keyring
+
+pacman -Syyuu
+
+pacman -S neovim
+
+pacman -S git curl 
+
+pacman -S nodejs python3 ruby rust
+
+pacman -S yarn npm
+
+pacman -S base-devel
+
+LunarVim - https://www.lunarvim.org/docs/installation
+
+instalar lunarvim
+
+LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+
+yay - https://github.com/Jguer/yay
+
+instalar yay
+
+pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+
+pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+
+yay -S zsh
+
+instalar o tema do zsh - https://github.com/romkatv/powerlevel10k
+
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
+chsh -s /usr/bin/zsh
+
+yay -S asdf-vm
+source /opt/asdf-vm/asdf.sh
+
+zsh auto-suggestions
+https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+
+configurando o zsh
+.zshrc
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+export PATH=$PATH:$HOME/.cargo/bin
+export PATH=$PATH:$HOME/.local/bin
+source /opt/asdf-vm/asdf.sh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+instalando as linguagens de programação no asdf
+asdf plugin add nodejs
+asdf list all nodejs
+asdf install nodejs
+asdf global nodejs
+asdf local nodejs
+asdf plugin add ruby
+gem install rails
+asdf list
+asdf update
+
+
+
+yay jdk
+
+source /etc/profile.d/jre.sh
+
+sudo pacman -S pyenv
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+
+echo "alias python=/usr/sbin/python3" >> ~/.zshrc
+
+https://zaiste.net/posts/shell-commands-rust/
+
+cargo install bat exa procs dust tokei ytop tealdeer grex rmesg zoxide delta                                     
+
+DOCKER DESKTOP
+yay -S docker
+docker ps
+
+yay -S chromium
+
+SPEEDOMETER SITE DE TESTE
+https://browserbench.org/Speedometer2.0/
+
+copiar chaves ssh
+
+copiar pasta de projetos
+
+git clone projetos
+

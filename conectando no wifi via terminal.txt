@@ -1,0 +1,30 @@
+conectando no wifi via terminal
+
+iwctl
+pacman -S iwctl
+apt install iwctl
+dnf install iwctl
+zypper install iwctl
+emerge iwctl
+
+iwctl
+station list scan
+station wlan0 scan
+station wlan0 connect casa01
+digitar senha
+exit
+
+ou
+
+configurar internet com smartphone:
+conectar cabo usb do smartphone em modo tethering (conexão usb)
+pacman -S networkmanager net-tools dhcpcd
+systemctl enable NetworkManager
+systemctl start NetworkManager
+systemctl enable dhcpcd
+systemctl start dhcpcd
+
+configurar wifi:
+nmtui
+ping -c3 archlinux.org
+

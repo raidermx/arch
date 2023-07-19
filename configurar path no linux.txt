@@ -1,0 +1,40 @@
+configurar path no linux
+
+Para declarar uma path no Linux, você precisa seguir os seguintes passos:
+
+1. Para identificar o shell em seu sistema, execute o seguinte comando no terminal:
+
+ echo $0
+
+
+2. Agora, com base no shell que você está usando, você terá que editar seu arquivo de configuração. Aqui está o arquivo que você precisa editar com base em seu shell:
+
+Nome da Shell	Arquivo de configuração
+bash	~ / .bashrc
+ksh	~ / .kshrc
+zsh	~ / .zshrc
+csh	~ / .cshrc
+
+
+3. Abra o terminal e digite o seguinte comando para abrir o arquivo .bashrc. Você pode usar qualquer editor de texto Linux de sua escolha.
+
+nvim ~/.bashrc
+
+4. Use a seguinte sintaxe para definir a variável $ PATH.
+
+export PATH=$PATH:/path/to/directory/
+
+5. Salve o arquivo e atualize o ambiente shell atual usando o código-fonte. 
+
+source ~/.bashrc
+
+6. Digite o seguinte comando para verificar se o diretório foi adicionado ou não.
+
+echo $PATH
+
+7. Para definir $ PATH globalmente, você precisará adicionar o diretório usando o mesmo comando usado ao adicionar a configuração temporária e permanente, mas no arquivo / etc / environment ou no arquivo / etc / profile .
+
+Abra um desses arquivos e anexe o caminho do diretório:
+
+ nano /etc/environment
+ nano /etc/profile

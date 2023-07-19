@@ -68,7 +68,7 @@ montar sistema de arquivos:
 
 # mount /dev/sda3 /mnt
 # swapon /dev/sda2
-# mount --mkdir /dev/sda1 /mnt/boot/efi
+# mount --mkdir -p /dev/sda1 /mnt/boot/efi
 
 copiar os pacotes essenciais:
 

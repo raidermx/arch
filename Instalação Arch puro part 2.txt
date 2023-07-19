@@ -1,0 +1,69 @@
+Segunda parte Interface Grafica e outros
+
+========================================================================================================
+
+Deixar a rede sempre ativa
+ 
+	sudo dhcpcd
+ 
+	sudo systemctl start  NetworkManage
+ 
+	sudo systemctl enable NetworkManager
+ 
+========================================================================================================
+ 
+preparar para instalar a interface grafica
+ 
+	sudo pacman -S xorg-server xorg-xinit xorg-apps mesa
+
+========================================================================================================
+ 
+driver de video
+ 
+	sudo pacman -S
+         
+         intel:  xf86-video-intel
+         
+         amd:    xf86-video-amdgpu
+         
+         nvidia  nvidia nvidia-setting (****nvidia-dkms***)
+ 
+========================================================================================================
+ 
+Interface grafica
+ 
+	sudo pacman -S bash-completion plasma-desktop plasma-wayland-session plasma-nm plasma-framework ffmpegthumbnailer ffmpegthumbs plasma-pa okular gwenview kscreen powerdevil noto-fonts-emoji sddm konsole dolphin dolphin-plugins spectacle plasma-integration plasma-workspace kded kwayland kwayland-integration systemsettings plasma-workspace-wallpapers firefox ntfs-3g
+
+
+systemctl enable sddm.service
+
+========================================================================================================
+
+cria novo grupo
+
+	groupadd (seu usuario)
+
+========================================================================================================
+
+Instala pipewire ou pulseaudio
+
+         Pipewire
+
+                 sudo pacman -S alsa-firmware alsa-utils a52dec faac faad2 flac jasper lame libdca libmpeg2 libtheora libvorbis libxv wavpack x264 x265 xvidcore pipewire pipewire-pulse wireplumber
+
+         systemctl --user enable pipewire-pulse.service
+         systemctl --user enable pipewire.service
+         systemctl --user --now enable wireplumber.service
+
+=====================================
+
+         Pulseaudio
+
+                 sudo pacman -S pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseaudio-equalizer pulseaudio-jack pulseaudio-lirc pulseaudio-zeroconf pulseaudio-qt
+
+         systemctl --user --now enable pulseaudio.service pulseaudio.socket
+
+========================================================================================================
+
+
+pronto reiniciar o pc e ele deve ir pro modo grafico (fim)

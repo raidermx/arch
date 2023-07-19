@@ -1,0 +1,272 @@
+INSTALAÇÃO ARCH LINUX           https://wiki.archlinux.org/title/Installation_guide_(Portugu%C3%AAs)
+
+1 - definir o layout do teclado do console
+por padrão vem us
+listar todos os layouts
+
+ls /usr/share/kbd/keymaps/**/*.map.gz
+
+para definir um layout de teclado ABNT (brasileiro)
+
+loadkeys br-abnt2  
+
+Fontes de nano nnnconsole estão localizadas em /usr/share/kbd/consolefonts/ e, de forma semelhante, podem ser definidas com setfont(8). (opcional)
+
+Definir o idioma do ambiente live
+
+O ambiente live vem em inglês (locale en_US.UTF-8) por padrão, mas você pode alterá-lo para executar as etapas de instalação usando o idioma desejado. 
+
+Para português brasileiro, descomente pt_BR.UTF-8 UTF-8 e qualquer outro locale desejado em /etc/locale.gen e gere-os com: 
+
+locale-gen
+
+Então, exporte a variável LANG acrescentando o idioma e codificação desejados. Por exemplo, para português brasileiro seria: 
+
+export LANG=pt_BR.UTF-8
+
+========================================================================================================
+
+Verificar o modo de inicialização
+
+ls /sys/firmware/efi/efivars
+
+Se o comando mostrar o diretório sem erro, então o sistema foi inicializado no modo UEFI. Se o diretório não existir, o sistema pode ser inicializado no modo BIOS (ou CSM). Se o sistema não inicializou no modo que você queria, consulte o manual da sua placa-mãe. 
+
+========================================================================================================
+
+Conectar à internet
+
+ip link
+
+Para rede sem fio e WWAN, certifique-se que a placa de rede não esteja bloqueada com rfkill.
+Conecte-se à rede:
+
+    Wi-Fi — autentique-se à rede sem fio usando     iwctl.
+    
+    digitar iwctl 
+    station list scan (iria aparecer a lista de wi-fi) ex: wlan0 é o driver de rede
+    station wlan0 scan (tem que aparecer as redes wi-fi)
+    station wlan0 connect (nome do wi-fi)
+    depois a senha do wi-fi
+        
+A conexão pode ser verificada com ping: 
+
+   ping -c4 archlinux.org
+
+========================================================================================================
+
+Atualizar o relógio do sistema
+
+Use timedatectl para garantir que o relógio do sistema está certo: 
+
+timedatectl set-ntp true
+
+Para verificar o status do serviço, use timedatectl status
+
+========================================================================================================
+
+Partição dos discos
+
+Quando reconhecido pelo sistema live, discos são atribuídos a um dispositivo de bloco tal como /dev/sda, /dev/nvme0n1 ou /dev/mmcblk0. Para identificar esses dispositivos, use lsblk ou fdisk. 
+
+fdisk -l
+lsblk  
+
+PEGAR O HD QUE VAI UTILIZAR
+
+vamos começar a particionar o disco
+cfdisk /dev/sda
+
+escolher gpt ou dos
+
+cria uma partição de boot 500 mb 
+swap fica a seu criterio o tamanho
+criar partição root
+criar partição home
+
+depois formnate as partiçoes 
+escolher o formato ex: brtfs ou ext4
+
+mkfs.fat -F32 /dev/partição boot   
+OBS:    (Se você receber a mensagem WARNING: Not enough clusters for a 32 bit FAT!, reduza o tamanho do cluster com mkfs.fat -s2 -F32 ... ou -s1; caso contrário, a partição pode ser ilegível pelo UEFI. Veja mkfs.fat(8) para os tamanhos de cluster suportados. )
+
+mkfs.btrfs /dev/partição_raiz
+mkfs.btrfs /dev/partição_home
+e inicializar a swap, mkswap /dev/partição_swap
+
+========================================================================================================
+
+MONTAR OS SISTEMAS DE ARQUIVOS
+
+a partição raiz deve ser montada em /mnt
+
+mount /dev/sda(ou a correspondente) /mnt
+
+========================================================================================================
+
+criar a partição home 
+
+mkdir /mnt/home
+
+criar a partição de boot
+se for modo legacy    mkdir /mnt/boot
+
+se for em efi mkdir /mnt/boot
+	      mkdir /mnt/boot/efi
+
+depois montar todas no seu respetivas pastas 
+
+ex:
+
+mount /dev/sda2 /mnt/boot   ou /mnt/boot/efi
+
+mount /dev/sda3 /mnt/home
+
+se vc criou swap habilite
+
+swapon /dev/sda4
+
+========================================================================================================
+
+INSTALAÇÃO
+
+Instalar os pacotes essenciais
+
+Use o script pacstrap para instalar o pacote base, um kernel Linux e um firmware para hardwares comuns: 
+
+pacstrap /mnt base base-devel linux linux-firmware linux-headers nano 
+
+========================================================================================================
+
+Configurar o sistema
+Fstab
+
+Gere um arquivo fstab (use -U ou -L para definir por UUID ou rótulos, respectivamente): 
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+Verifique o arquivo /mnt/etc/fstab resultante e edite-o caso haja erros. 
+
+========================================================================================================
+
+Chroot (entra no sistema instalado)
+
+Mude a raiz para novo sistema: 
+
+arch-chroot /mnt
+
+========================================================================================================
+
+Fuso horário
+
+Defina o fuso horário: 
+
+exemplo de link simbolico   ln -sf /usr/share/zoneinfo/regiao/cidade /etc/localtime
+
+definir horario de brasilia
+
+ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+
+Execute hwclock para gerar /etc/adjtime:
+
+ hwclock --systohc    = Esse comando presume que o relógio de hardware está definido para UTC
+
+ verifica a hora:  date
+
+========================================================================================================
+ 
+ Localização
+
+Edite /etc/locale.gen e descomente pt_BR.UTF-8 UTF-8 com qualquer outro locale necessário. Gere os locales executando: 
+
+locale-gen
+
+Crie o arquivo locale.conf e defina a variável LANG adequadamente:
+
+nano /etc/locale.conf
+
+LANG=pt_BR.UTF-8
+
+se você definir o layout do teclado, torne as alterações persistentes em vconsole.conf(5): 
+
+nano /etc/vconsole.conf
+
+KEYMAP=br-abnt2
+
+Configuração de rede
+
+Crie o arquivo hostname: 
+
+nano /etc/hostname
+
+meuhostname (nome do pc)
+
+========================================================================================================
+
+Adicione entradas correspondentes ao hosts:
+
+nano /etc/hosts
+
+127.0.0.1	localhost.localdomain	localhost
+::1		localhost.localdomain	localhost
+127.0.1.1	meuhostname.localdomain	meuhostname
+
+OBS:   Se o sistema tem um endereço IP permanente, ele deve ser usado em vez de 127.0.1.1. 
+
+========================================================================================================
+
+Senha do root
+
+Defina a senha do root (também conhecido como "superusuário"):
+
+ passwd
+
+========================================================================================================
+
+Adicionar usuario 
+	     
+useradd -m -g users -G wheel,storage,power -s /bin/bash (seu usuario)
+	 (cria a home)
+colocar o usuario no sudo
+
+nano /etc/sudoers
+
+descomente a linha: %whell ALL=(ALL:ALL) ALL (linha n°85)
+
+criar senha de usuario
+
+passwd (seu usuario)
+
+========================================================================================================
+
+Instalação do grub e outros pacotes necessarios
+
+pacman -S dosfstools mtools os-prober grub network-manager-applet networkmanager wpa_supplicant wireless_tools dialog dhcpcd
+
+========================================================================================================
+
+instalar o grub 
+
+modo legacy
+
+	grub-install --target=i386-pc /dev/sda (é o hd que está o seu arch tome muito cuidado nesta hoje)
+	
+	grub-mkconfig -o /boot/grub/grub.cfg
+	
+===========================
+
+modo efi
+
+	pacman -S grub efibootmgr
+	
+	grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub	
+	
+	grub-mkconfig -o /boot/grub/grub.cfg
+	
+	
+	reiniciar agora
+	
+reboot now
+	
+Pronto a primeira parte, que foi a instalação do systema base foi concluida 
+descanse um pouco
