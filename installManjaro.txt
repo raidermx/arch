@@ -20,7 +20,7 @@ makepkg -si
 yay google chrome
 yay temviewer
 yay ttf-ms-win11
-pamac build ms-office-online (yay microsoft-office-web-jak)
+yay ms-office-online (pamac install microsoft-office-web-jak)
 configurar usuarios
 configurar individualmente:
 gmail
