@@ -1,0 +1,16 @@
+Pamac
+
+pamac install systemd-swap
+Configurando #
+Para ativar use o comando no terminal
+
+sudo nano /usr/share/systemd-swap/swap-default.conf
+Em ZRam altere a linha zram_enabled=0 para zram_enabled=1 salve e saia para ativar.
+
+Agora inicie o systemd-swap e já adicona o mesmo para iniciar com o sistema.
+
+sudo systemctl enable --now systemd-swap
+Se você utilizou o comando acima, você já pode verificar como ficou a sua zram.
+
+cat /proc/swaps
+Ele irá criar apenas um bloco com 1/4 da sua quantidade de memória RAM.
