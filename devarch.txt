@@ -26,11 +26,14 @@ instalar lunarvim
 
 LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
 
+post install
+https://github.com/ryanoasis/nerd-fonts
+[WARN] the folder /home/raidermx/.local/bin is not on PATH, consider adding 'export PATH=/home/raidermx/.local/bin:$PATH' to your /home/raidermx/.zshenv
+
+
 yay - https://github.com/Jguer/yay
 
 instalar yay
-
-pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
 pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
