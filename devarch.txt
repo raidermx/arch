@@ -58,6 +58,8 @@ https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
+asdf
+pacman -S asdf-vm
 
 configurando o zsh
 .zshrc
