@@ -48,13 +48,22 @@ yay -S zsh
 
 instalar o tema do zsh - https://github.com/romkatv/powerlevel10k
 
+
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 
+alterando o shell:
 chsh -s /usr/bin/zsh
+ou 
+vim /etc/passwd
+usuario.../usr/bin/zsh
 
-yay -S asdf-vm
-source /opt/asdf-vm/asdf.sh
+ajustando temas:
+Copie o arquivo “.zshrc” para o diretório “/root”. ou do root para o usuario.
+sudo cp /home/$USER/.zshrc /root
+ou
+sudo cp /root/.zshrc /home/$USER/.zshrc
+
 
 zsh auto-suggestions
 https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
@@ -69,6 +78,10 @@ export PATH=$PATH:$HOME/.local/bin
 source /opt/asdf-vm/asdf.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+asdf - versionador de linguagens - instale varias versões sem comprometer o sistema.
+yay -S asdf-vm
+source /opt/asdf-vm/asdf.sh
+
 instalando as linguagens de programação no asdf
 asdf plugin add nodejs
 asdf list all nodejs
@@ -81,7 +94,7 @@ asdf list
 asdf update
 
 
-
+oracle-jdk
 yay jdk
 
 source /etc/profile.d/jre.sh
