@@ -1,0 +1,58 @@
+instalar impressora
+instalar os pacotes:
+sudo pacman -S cups ghostscript gsfonts hplip
+habilitar os serviços:
+sudo systemctl enable cups.service
+sudo systemctl start cups.service
+Se não o fizeram durante a instalação, devemos adicionar nosso usuário ao grupo lp e o grupo digitalizador:
+
+sudo gpasswd -a scanner
+sudo gpasswd -a lp
+
+Depois de instalar os pacotes e adicionar nosso usuário aos grupos mencionados, só precisamos configurar a impressora.
+
+sudo hp-setup
+
+O comando anterior requer algumas bibliotecas para rodar, se você não quiser instalá-las, e fazer a configuração do terminal, basta adicionar -i ao comando.
+
+sudo hp-setup -i
+
+A tela que ele mostra é bastante intuitiva.
+
+Com que certeza é uma multifuncional USB, basta dar [Entrar] no primeiro comando e, em seguida, responda a algumas perguntas simples, onde você pode dar um nome ao dispositivo e se você deseja especificar um local. Por exemplo: Multifuncional 1, vivo.
+
+Depois de concluído, seria necessário instalar algum software para digitalizar, pois podemos imprimir de onde estivermos, Libre Office, e assim por diante.
+
+Eu particularmente prefiro Simple-Scan
+
+sudo pacman -S sane simple-scan
+
+Ele irá instalar algumas dependências.
+
+Ao terminar a instalação, se você abrir o simple-scan, ele certamente dirá que não encontrou nenhum dispositivo, agora nós resolvemos.
+
+sudo sane-find-scanner
+
+Uma vez que o encontre, é necessário proceder para descomentar uma linha de sã.
+
+sudo nano /etc/sane.d/dll.conf
+
+No final, descomentamos a linha que diz hpaio
+
+Então é:
+
+#hpaio
+
+Deve ser assim:
+
+hpaio
+
+Nós salvamos e fechamos.
+
+Agora, testamos o scanner, podemos fazer isso via terminal:
+
+sudo scanimage -L
+
+Ou fazemos uma varredura simples e digitalizamos algo.
+
+para epson procurar os drivers nos repositorios aur.
