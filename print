@@ -1,6 +1,6 @@
 instalar impressora
 instalar os pacotes:
-sudo pacman -S cups ghostscript gsfonts hplip
+sudo pacman -S cups ghostscript gsfonts hplip system-config-printer print-manager
 habilitar os serviços:
 sudo systemctl enable cups.service
 sudo systemctl start cups.service
