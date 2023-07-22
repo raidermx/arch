@@ -6,7 +6,7 @@ Deixar a rede sempre ativa
  
 	sudo dhcpcd
  
-	sudo systemctl start  NetworkManage
+	sudo systemctl start  NetworkManager
  
 	sudo systemctl enable NetworkManager
  
