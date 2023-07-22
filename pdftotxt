@@ -1,0 +1,70 @@
+Como Converter um PDF em Texto no Linux
+Efetuar uma tarefa de conversão dum PDF em texto no Linux é fácil se você souber algumas das dicas e truques no seu sistema operacional Linux em particular, mas e se o Linux for novo para você e necessitar que um documento PDF seja convertido num equivalente baseado em texto? Há alguma ferramenta de Linux concebida especificamente para isso? E quanto a módulos de OCR – como você os pode obter para Linux? As respostas a essas perguntas estão todas neste artigo, portanto, continue lendo para saber mais acerca de como você pode converter um PDF em texto no Linux.
+ferramentas pdf: evince, atril, okular, xpdf, pdfarranger, masterpdf
+
+2 Métodos para Converter um PDF em Texto no Linux
+Como Converter um PDF em Texto no Windows e Mac
+2 Métodos para Converter um PDF em Texto no Linux
+Vamos lá dar uma olhadela nalgumas formas de fazer isso num desktop Linux e as suas ferramentas.
+
+Método 1: Use um aplicativo de e-Books
+Essencialmente, o que você quer fazer é converter um documento PDF não editável e possivelmente não pesquisável, sem realmente alterar a formatação. Para isso você pode utilizar um software gratuito ou um aplicativo de código aberto como o Calibre. Ele está disponível na maior parte dos repositórios para Ubuntu, Mint, Fedora e outros sistemas operacionais Linux populares. A sintaxe correta varia de um sistema para o outro, mas o comando básico do Terminal deve ser algo assim:
+
+sudo apt install calibre
+
+Assim que ele for instalado, você pode seguir o fluxo do processo dentro do aplicativo. É assim que deve acontecer:
+
+1. Inicie o aplicativo e clique no botão Adicionar Livros no canto superior esquerdo para importar um ou mais documentos PDF escaneados ou não editáveis.
+2. Quando você vir os PDFs na lista abaixo da barra de ferramentas do Calibre, selecione o arquivo(s) que você quer converter em texto e aperte a opção Converter Livros na parte superior.
+3. Escolha o formato do arquivo de saída como TXT na janela de conversão e aperte OK para converter.
+pdf para texto no linux
+Agora você pode abrir o arquivo num editor de texto qualquer e efetuar alterações ou editar o conteúdo da forma que você desejar. Isto não retém a formatação original, mas é uma cópia consideravelmente autêntica do arquivo não editável. O documento PDF original permanecerá inalterado, portanto, você pode salvar a nova versão com um nome ligeiramente diferente como Doc1_OCR, Doc2_OCR, e assim por diante.
+
+Método 2: Use os Comandos do Terminal
+Por outro lado, se você for um especialista do seu sistema operacional Linux, você pode tentar a linha de comando como meio para converter o PDF em texto. Para isso, você pode usar algo como o pdftotext. Ele faz parte do pacote Poppler, mas o nome pode variar dependendo do sistema operacional Linux que você está usando. O primeiro passo é instalá-lo, e você pode fazer isso com os seguintes comandos:
+
+1. Primeiro, insira o seguinte no Terminal e carregue "Enter"
+
+sudo apt install poppler-utils [Funciona para Debian, Mint, Ubuntu, etc.]
+
+2. O próximo comando é para a conversão, e ele deve ser assim:
+
+pdftotext -layout source.pdf target.txt [Source é o PDF original e Target é o resultado final]
+
+Para executar o comando acima, o prompt do Terminal necessita estar na mesma pasta que o seu arquivo PDF fonte. Alternativamente, você pode definir um caminho antes dos nomes dos arquivos fonte e destino dentro do comando.
+
+3. Carregue em Enter para executar o comando no documento PDF inteiro. Para converter somente um conjunto de páginas dentro do documento, altere a sintaxe para combinar com a que é mostrada abaixo:
+
+pdftotext -layout -f M -l N source.pdf target.txt [onde M é a primeira página e N é a última página a ser convertida.]
+
+pdf para texto no linux
+
+Como Converter um PDF em Texto no Windows e Mac
+Agora você já sabe como converter PDF em texto no Linux, mas e quanto ao Windows ou ao Mac? Você sabe como fazer o mesmo nestes sistemas operacionais? Se não, continue lendo para saber mais acerca dum serviço único e robusto que realiza o mesmo trabalho em sistemas operacionais diferentes do Linux.
+
+PDFelement é um editor de PDFs multiplataforma com aplicativos para desktop e celular para gerenciamento de PDFs. Ele possui uma família leve de ferramentas de PDF que são incrivelmente excelentes e versáteis. Mas mais importante que isso, ele é bem mais viável do que outras opções Premium que dominam o mercado atual. Por este motivo, o PDFelement está rapidamente se tornando no editor de PDF de eleição para as empresas em que não é viável adquirir as alternativas dispendiosas. Adicionalmente, ele possui estes recursos:
+
+pdf para txt no linux
+Funções completas de edição de todos os elementos dum PDF como textos, imagens, links, mídias e outros objetos.
+Ferramentas abrangentes de marcação para criar anotações nos PDFs.
+Fortes recursos de segurança para redação, efetuar marcas d´’agua, criptografia e assinatura digital.
+Processos em série avançados para tarefas de conversão e OCR.
+Gerenciamento de formulários totalmente integrado: crie formulários interativos, converta formulários em PDF não editáveis, acesse uma vasta biblioteca de modelos, extraia dados de formulários e PDFs em lote, etc.
+Função robusta de conversão entre PDFs e outros formatos com um suporte bem amplo de diferentes tipos de arquivos.
+Mais preciso e rápido do que imensos editores de PDF Premium.
+Passos para Converter um PDF em Texto no Windows e no Mac:
+
+Windows:
+
+1. Depois de iniciar o PDFelement no seu PC Windows, importe o arquivo arrastando-o para a janela do software ou simplesmente clique em "Arquivo" → "Abrir" para o abrir. Mesmo quando o editor de PDF está fechado, você pode abrir um documento arrastando o seu ícone até o ícone do app.
+2. Se você clicar na aba "Converter" na parte superior, você verá um botão logo abaixo da barra de ferramentas com as palavras "Para Texto" e um ícone. Ao passar o mouse (dica de contexto), deve surgir "Converta seu PDF em texto". Clique no botão.
+3. Especifique a sua pasta de destino e, se precisar, você poderá também alterar o tipo de arquivo de destino na caixa de diálogo "Salvar Como".
+pdf para texto no ubuntu
+Mac (versões do macOS incluindo o 10.15 Catalina):
+
+O PDFelement é igualmente intuitivo mp Mac quanto é no Windows. Você pode ver um imensas diferenças de UI entre os dois, mas esses recursos foram concebidos para funcionar da maneira mais próxima possível com as nuances das suas plataformas. O resultado final é uma experiência bastante nativa em qualquer plataforma, incluindo em dispositivos e telas de iOS e Android baseados em tela de toque.
+
+1. O PDFelement para Mac tem um aspecto distintivamente similar ao Mac App assim que você instala e inicia o aplicativo. Você pode abrir o seu PDF usando os mesmos métodos usados no Windows – de arrastar e soltar ou usando o menu "Arquivo".
+2. Mais uma vez, no menu "Arquivo", você verá uma opção chamada "Exportar Para", que abre outro menu contextual. Selecione "Texto" como a sua opção e aguarde até que a conversão seja concluída.
+converter umpdf em texto no linux
+Agora você já sabe tudo o que há para saber sobre como converter um PDF em Texto no Linux, Windows e Mac.
