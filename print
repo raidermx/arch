@@ -25,7 +25,7 @@ Depois de concluído, seria necessário instalar algum software para digitalizar
 
 Eu particularmente prefiro Simple-Scan
 
-sudo pacman -S sane simple-scan
+sudo pacman -S sane simple-scan xsane
 
 Ele irá instalar algumas dependências.
 
