@@ -1,0 +1,14 @@
+habilitar osprober
+Uma solução é adicionar GRUB_DISABLE_OS_PROBER=false no arquivo /etc/default/grub.
+ou
+instalar o grub-customizer:
+yay grub-customizer
+Utilizando parâmetros de inicialização
+Uma vez que o GRUB Customizer esteja instalado, abra o software e acesse a aba “Configurações gerais”.
+Copie a linha abaixo e cole no campo “parâmetros do kernel”. Caso já haja algum texto nesse campo, 
+certifique-se de adicionar um “espaço” antes de colar a linha indicada.
+
+GRUB_DISABLE_OS_PROBER=false
+Feito isso, no canto superior esquerdo da janela, clique em “Salvar”, aguarde o salvamento estar completo
+e reinicie o seu computador. Pronto! O seu sistema está, novamente, compatível com a 
+funcionalidade de dual boot.
