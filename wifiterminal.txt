@@ -11,7 +11,7 @@ iwctl
 station list scan
 station wlan0 get-networks
 station wlan0 scan
-station wlan0 connect casa01
+station wlan0 connect 'casa 01'
 digitar senha
 exit
 
