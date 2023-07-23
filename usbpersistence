@@ -3,6 +3,13 @@ criar usb live com persistencia para gravar suas configurações após o boot
 fonte: https://www.kali.org/docs/usb/
 fonte:https://www.kali.org/docs/usb/live-usb-install-with-linux/
 
+criar pendrive
+sudo dd if=/home/usuario/Downloads/distribuiçãolinux.iso of=/dev/sdx bs=4096 status=progress oflag=sync
+formatar espaço restante
+mkfs.ext4 /dev/sdx
+persistence.conf
+/ union
+
 Making a Kali Bootable USB Drive (Linux)
 Table of Contents
 Our favourite way, and the fastest method, for getting up and running with Kali Linux is to run it “live” from a USB drive. This method has several advantages:
