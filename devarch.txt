@@ -4,7 +4,7 @@ wsl --install no windows
 ArchWSL no github https://github.com/yuk7/ArchWSL
 
 vim /etc/pacman.conf
-ParallelDownloads = 5
+ParallelDownloads = 8
 
 pacman -S archlinux-keyring
 
