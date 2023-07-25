@@ -10,15 +10,17 @@ pacman -S archlinux-keyring
 
 pacman -Syyuu
 
-pacman -S neovim
+pacman -S base-devel
 
-pacman -S git curl 
+pacman -S neovim git curl 
+
+pacman -S debootstrap
 
 pacman -S nodejs python3 ruby rust
 
 pacman -S yarn npm
 
-pacman -S base-devel
+
 
 LunarVim - https://www.lunarvim.org/docs/installation
 
@@ -31,7 +33,8 @@ https://github.com/ryanoasis/nerd-fonts
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
 
-[WARN] the folder /home/raidermx/.local/bin is not on PATH, consider adding 'export PATH=/home/raidermx/.local/bin:$PATH' to your /home/raidermx/.zshenv
+
+[WARN] the folder /home/user/.local/bin is not on PATH, consider adding 'export PATH=/home/user/.local/bin:$PATH' to your /home/user/.zshenv
 
 
 yay - https://github.com/Jguer/yay
@@ -100,6 +103,7 @@ yay jdk
 source /etc/profile.d/jre.sh
 
 python
+python3 -m pip install --upgrade pip
 sudo pacman -S pyenv
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
