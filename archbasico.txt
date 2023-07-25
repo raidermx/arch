@@ -1,4 +1,7 @@
-instalação básica archlinux
+instalação básica archlinux 
+https://wiki.archlinux.org/title/Installation_guide
+https://archlinux.c3sl.ufpr.br/iso/
+https://geo.mirror.pkgbuild.com/iso/
 
 loadkeys br-abnt2
 
