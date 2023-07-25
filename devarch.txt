@@ -74,7 +74,7 @@ https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 configurando o zsh
-.zshrc
+sudo vim .zshrc
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
