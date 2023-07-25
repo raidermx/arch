@@ -61,11 +61,7 @@ ou
 vim /etc/passwd
 usuario.../usr/bin/zsh
 
-ajustando temas:
-Copie o arquivo “.zshrc” para o diretório “/root”. ou do root para o usuario.
-sudo cp /home/$USER/.zshrc /root
-ou
-sudo cp /root/.zshrc /home/$USER/.zshrc
+
 
 
 zsh auto-suggestions
@@ -80,6 +76,12 @@ export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
 source /opt/asdf-vm/asdf.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+ajustando temas e configurações:
+Copie o arquivo “.zshrc” para o diretório “/root”. ou do root para o usuario.
+sudo cp /home/$USER/.zshrc /root
+ou
+sudo cp /root/.zshrc /home/$USER/.zshrc
 
 asdf - versionador de linguagens - instale varias versões sem comprometer o sistema.
 yay -S asdf-vm
