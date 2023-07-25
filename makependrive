@@ -1,0 +1,42 @@
+makependrive
+criando pendrive de boot para instalar sistema operacional:
+
+baixar a iso 
+links, esc e inserir url.
+
+criar sistemas de arquivo pendrive 
+Para criar o sistema de arquivos no pendrive através do terminal, conecte sua unidade USB e espere o sistemadetectá-la. Para saber seu identificador, 
+você pode executar o comando df, lsblk ou fdisk -l. Isso exibirá uma lista detalhada das mídias e discos conectados. 
+Por exemplo, neste caso, é  identificado como “/dev/sdc”.
+
+
+Quando uma unidade USB é conectada pela primeira vez no Ubuntu Linux, ela é montada
+automaticamente. Para formatar o pendrive no Linux, precisamos primeiro ejetar ele.
+Para fazer isso, você deve inserir o comando “unmount”, seguido do identificador. No caso,
+inseriremos o comando:
+
+sudo umount /dev/sdc
+
+Para criar o sistema de arquivos da unidade USB no Linux utilizaremos o comando “mkfs”. Ele terá um
+parâmetro que decidirá o sistema de arquivos na unidade, NTFS ou FAT32 é recomendado
+pela compatibilidade com a maioria dos sistemas operacionais.
+Abaixo estão algumas maneiras de escrevê-lo:
+
+Para o sistema de arquivos vFAT (FAT32)
+
+sudo mkfs.fat -F32 /dev/sdc
+
+Para sistema de arquivos NTFS
+
+sudo mkfs.ntfs /dev/sdc
+
+Para o sistema de arquivos EXT4
+
+sudo mkfs.ext4 /dev/sdc
+
+Após isso o pendrive aparecerá formatado no seu gerenciador de arquivos.
+
+
+copiar a iso para o pendrive
+
+sudo dd if=/home/usuario/Downloads/distribuiçãolinux.iso of=/dev/sdc bs=4096 status=progress oflag=sync
