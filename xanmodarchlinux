@@ -1,0 +1,3 @@
+git clone https://github.com/blacksky3/linux-xanmod.git
+cd linux-xanmod/{edge,stable,lts,rt61}
+env_compiler=(1 or 2) makepkg -s
