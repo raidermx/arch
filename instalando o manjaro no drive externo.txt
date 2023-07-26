@@ -1,0 +1,65 @@
+instalando o manjaro no drive externo
+
+baixar a iso do manjaro
+baixar o rufus
+gravar a imagem no drive externo
+
+da boot pelo pendrive
+
+inserir o drive externo
+
+iniciar o instalador
+
+configurar idioma e teclado
+
+na aba de particionamento selecionar o drive externo
+
+selecionar particionamento manual
+
+criar tabela de partição GPT
+ok
+criar partiçao de boot  300MiB
+Partition Type: GPT
+File System: fat32
+MountPoint: /boot
+marcar flags: boot
+ok
+criar partição root resto do disco
+Partition Type: GPT
+File System: ext4
+MountPoint: /
+ok
+
+install boot loader on:  
+selecionar:
+Boot Partition(/boot)
+next
+
+inserir usuario e senha
+next
+install
+
+desmarcar caixa de reiniciar
+done
+
+configurar o boot
+abrir o terminal
+lsblk
+sdb
+|_ sdb1 300M
+|_ sdb2 restododisco /tmp/calamares-root-....
+
+sudo mkdir /tmp/boot
+sudo mount /dev/sdb1 /tmp/boot
+sudo grub-install --target=x86_64-efi --removable --recheck --boot-directory=/tmp/boot --efi-directory=/tmp/boot
+
+reboot
+
+para debian:
+apos instalação gráfica
+sudo grub-install --removable --recheck --efi-directory=/boot/efi
+
+
+
+
+
