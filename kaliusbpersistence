@@ -4,7 +4,7 @@ fonte: https://www.kali.org/docs/usb/
 fonte:https://www.kali.org/docs/usb/live-usb-install-with-linux/
 
 criar pendrive
-sudo dd if=/home/usuario/Downloads/distribuiçãolinux.iso of=/dev/sdx bs=4096 status=progress oflag=sync
+sudo dd if=/home/usuario/Downloads/kalilinux.iso of=/dev/sdx bs=4096 status=progress oflag=sync
 formatar espaço restante
 mkfs.ext4 /dev/sdx3
 persistence.conf
