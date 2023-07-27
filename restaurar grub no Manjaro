@@ -1,0 +1,100 @@
+restaurar grub no Manjaro
+
+verificar entradas uefi:
+efibootmgr -v 
+
+remover entradas uefi:
+efibootmgr -b 0 -B
+
+para verificar security boot:
+mokutil --sb-state
+
+
+To identify your partitions and their designated use you need to run a partition manager. Depending on environment there is various tools. GTK based ISO offers GpartEd, QT based ISO offers KParted and common to all is the CLI tools.
+
+user $ lsblk -o PATH,PTTYPE,PARTTYPE,FSTYPE,PARTTYPENAME
+
+More comprehensive information can be found using fdisk (requires superuser) and you can limit the probed device e.g. /dev/sda or /dev/nvme0n1
+
+user $ sudo fdisk -l /dev/sda
+
+The clues to look for is mbr vs. gpt and the presence of a small partition - usually the first - formatted with the vfat filesystem followed by a larger partition formatted as ext4.
+
+
+Info
+This document and the content should never be used as a copy/paste resource. The remainder of this document will use pseudo names and partition numbering. Devices will be referred as /dev/sdy and partitions referred as /dev/sdyA and you will have to subtitute those with the real values from your system.
+
+When you have loaded the live ISO - depending on environment - open a terminal and switch to root context. Use above mentioned root:password combination.
+
+user $ su
+
+Chroot is a method to restrict various tasks to a restricted area e.g. package installation and other system maintenance tasks. Follow the link to read more about chroot on the Arch wiki.
+
+Identify system partitions
+From the above we assume you have identified the relevant partitions on your system and this document will refer the partitions as follows. Partitions not needed for this kind of maintenance has intentionally been left out (e.g. home, swap).
+
+Partition	Usage	Comment
+/dev/sdyA	EFI system	Required for EFI system and mounted on /boot/efi
+/dev/sdyB	boot	Optional but mounted on /boot The primary use is when GRUB cannot write to / (eg. f2fs)
+/dev/sdyC	root	Required and for the root filesystem and mounted on / - usually formatted using ext4
+Info
+If your system is a BIOS/MBR system there is no efi partition. If your system is a BIOS/GPT system you will find an unformatted partion size 1-32MB of the bios boot partition type.
+
+Use manjaro-chroot
+Manjaro deploys a script called manjaro-chroot takes an optional argument which will search the visible devices - scan the partitions for signs of an operating system. If more than one Linux operating system is found you will get a choice of which system to chroot otherwise the file /etc/fstab from the system is used to mount the partitions and chroot into this system.This script is only available in live iso by default but you can get it in an installed system by installing manjaro-tools-base package.
+
+root # pamac install manjaro-tools-base
+
+root # manjaro-chroot -a
+
+Manual chroot
+(Unnecessary if you have used manjaro-chroot) Mount the partitions using the designated temporary mountpoint and always start with root
+
+root # mount /dev/sdyC /mnt
+
+Info
+With a BTRFS filesystem, you should note that the subvolumes must be mounted. That would be in such a case:
+
+root # mount -o subvol=@ /dev/sdyC /mnt
+
+
+Then - if applicable - mount boot
+
+root # mount /dev/sdyB /mnt/boot
+
+Then - if applicable - mount efi
+
+root # mount /dev/sdyA /mnt/boot/efi
+
+Create the chroot environment and use bash as shell
+
+root # manjaro-chroot /mnt /bin/bash
+
+
+One possible cause why you are reading this document - is an unfinished update - which in turn can be caused by several situations - situation we will not dive into. To fix what ever caused this you should run a full system update including grub to ensure everything is in place.
+
+root # pacman -Syu grub
+
+When the transaction as completed continue below using the section matching your system
+
+BIOS System
+On a BIOS/GPT system there is no MBR and therefore no place to store the loader. The GPT partition specification allows for an unformatted partition of the BIOS boot partition type (0xEF02). The size of this partition can be as small as 1 mebibyte. The Calamares installer uses a fixed size of 32 mebibyte. On a BIOS/MBR system a part of the bootloader is written to the Master Boot Record for the primary disk.
+
+The device is the disk (not a partition)
+
+root # grub-install --force --target=i386-pc --recheck --boot-directory=/boot /dev/sdy
+
+Make sure the grub configuration is up-to-date
+
+root # grub-mkconfig -o /boot/grub/grub.cfg
+
+
+EFI SYSTEM
+
+Reinstall grub
+
+root # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=manjaro --recheck
+
+Update the grub configuration
+
+root # grub-mkconfig -o /boot/grub/grub.cfg

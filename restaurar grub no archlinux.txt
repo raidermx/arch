@@ -1,0 +1,20 @@
+restaurar grub no archlinux
+
+verificar entradas uefi:
+efibootmgr -v 
+
+remover entradas uefi:
+efibootmgr -b 0 -B
+
+para verificar security boot:
+mokutil --sb-state
+
+mount /dev/sda1 /mnt/boot/efi
+arch-chroot /mnt
+
+
+pacman -S grub efibootmgr os-prober
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
+
+grub-mkconfig -o /boot/grub/grub.cfg
