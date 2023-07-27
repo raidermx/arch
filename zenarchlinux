@@ -1,0 +1,11 @@
+Mudar o Kernel p/o zen
+
+	sudo pacman -S linux-zen linux-zen-headers
+	
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	
+sudo reboot now  
+
+conferir se o kernel mudou 
+
+	uname -r
