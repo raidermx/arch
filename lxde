@@ -1,0 +1,56 @@
+archlinux LXDE 
+Consumo de memória 350mb
+Espaço em hd 8gb
+pcfm
+Lxde
+
+Deixar a rede sempre ativa
+ 
+	sudo dhcpcd
+ 
+	sudo systemctl start  NetworkManager
+ 
+	sudo systemctl enable NetworkManager
+ 
+========================================================================================================
+ 
+preparar para instalar a interface grafica
+ 
+	sudo pacman -S xorg-server xorg-xinit xorg-apps mesa
+
+========================================================================================================
+ 
+driver de video
+ 
+	sudo pacman -S
+         
+         intel:  xf86-video-intel
+         
+         amd:    xf86-video-amdgpu
+         
+         nvidia  nvidia nvidia-setting (****nvidia-dkms***)
+ 
+========================================================================================================
+ interface grafica LXDE
+
+pacman -S lxde
+systemctl enable lxdm
+nvim .xiinitrc
+exec startlxde
+
+pacotes extras
+pacman -S xdg-user-dirs chromium xf86-input-synaptics ntfs-3g abiword gnumeric gwenview evince htop xterm uget  gufw  mpv smplayer ark lximage-qt galculator gxmessage leafpad stoken xarchiver elinks jami gparted  yay octopi  vlc gimp inkscape
+
+configurar teclado
+
+mkdir -p /etc/X11/xorg.conf.d/
+nvim /etc/X11/xorg.conf.d/10-evdev.conf
+Section "InputClass"
+	Identifier "evdev keyboard catchall"
+	MatchIsKeyboard "on"
+	MatchDevicePath "/dev/input/event*"
+	Option "XkbLayout" "br"
+	Option "XkbVariant" "abnt2"
+EndSection
+
+ ========================================================================================================
